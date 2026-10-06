@@ -1,3 +1,13 @@
+import TodoList from './components/TodoList'
+import type { Task } from './types/todo'
+
+// 動作確認用のサンプル（段階6でAPIから取得したデータに置き換える）
+const sampleTasks: Task[] = [
+  { id: 1, title: '牛乳を買う', completed: false },
+  { id: 2, title: 'Viteをインストールする', completed: true },
+  { id: 3, title: 'Reactのドキュメントを読む', completed: false },
+]
+
 function App() {
   return (
     <main className="min-h-screen bg-slate-100 px-4 py-10">
@@ -42,30 +52,10 @@ function App() {
           </button>
         </div>
 
-        <ul className="divide-y divide-slate-200 border-y border-slate-200">
-          <li className="flex items-center gap-3 py-3">
-            <input type="checkbox" className="size-4 accent-blue-600" />
-            <span className="flex-1 text-slate-800">牛乳を買う</span>
-            <button
-              type="button"
-              className="rounded-md px-2 py-1 text-sm text-red-600 hover:bg-red-50"
-            >
-              削除
-            </button>
-          </li>
-          <li className="flex items-center gap-3 py-3">
-            <input type="checkbox" className="size-4 accent-blue-600" defaultChecked />
-            <span className="flex-1 text-slate-400 line-through">Viteをインストールする</span>
-            <button
-              type="button"
-              className="rounded-md px-2 py-1 text-sm text-red-600 hover:bg-red-50"
-            >
-              削除
-            </button>
-          </li>
-        </ul>
+                <TodoList tasks={sampleTasks} />
 
-        <p className="mt-4 text-sm text-slate-600">未完了：1 件</p>
+        {/* 件数の計算は段階5で行う */}
+        <p className="mt-4 text-sm text-slate-600">未完了：2 件</p>
       </div>
     </main>
   )
