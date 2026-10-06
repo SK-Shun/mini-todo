@@ -2,9 +2,11 @@ import type { Task } from '../types/todo'
 
 type TodoItemProps = {
   task: Task
+  onToggle: (id: number) => void
+  onDelete: (id: number) => void
 }
 
-function TodoItem({ task }: TodoItemProps) {
+function TodoItem({ task, onToggle, onDelete }: TodoItemProps) {
   // 分割代入：task.id・task.title・task.completed を同名の変数に取り出す
   const { id, title, completed } = task
 
@@ -15,7 +17,7 @@ function TodoItem({ task }: TodoItemProps) {
         type="checkbox"
         className="size-4 accent-blue-600"
         checked={completed}
-        readOnly
+        onChange={() => onToggle(id)}
       />
       <label
         htmlFor={`task-${id}`}
@@ -26,6 +28,8 @@ function TodoItem({ task }: TodoItemProps) {
       <button
         type="button"
         className="rounded-md px-2 py-1 text-sm text-red-600 hover:bg-red-50"
+        aria-label={`「${title}」を削除`}
+        onClick={() => onDelete(id)}
       >
         削除
       </button>
