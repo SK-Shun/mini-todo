@@ -1,0 +1,36 @@
+# ワークフローの名前（Actions タブや Pull Request のチェック欄に表示される）
+name: CI
+
+# いつ実行するか
+on:
+  pull_request:
+    branches: [main] # main に向けた Pull Request が作られた・更新されたとき
+  push:
+    branches: [main] # main に push（マージ）されたとき
+
+# このワークフローに与える権限（コードの読み取りだけ）
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint と Build
+    runs-on: ubuntu-latest # GitHub が用意する Linux の仮想マシンで実行する
+    steps:
+      - name: リポジトリのコードを取得
+        uses: actions/checkout@v7
+
+      - name: Node.js をセットアップ
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: 依存パッケージをインストール
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build（型チェックを含む）
+        run: npm run build
