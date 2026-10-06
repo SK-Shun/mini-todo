@@ -83,7 +83,7 @@ function App() {
 
   // 派生データ：state から毎回計算する値（state には入れない）
   const visibleTasks = filterTasks(tasks, filter)
-  const activeCount = tasks.filter((task) => !task.completed).length
+  const activeCount: string = tasks.filter((task) => !task.completed).length
 
   return (
     <main className="min-h-screen bg-slate-100 px-4 py-10">
