@@ -2,9 +2,10 @@ import { useState, type SubmitEvent } from 'react'
 
 type TodoFormProps = {
   onAdd: (title: string) => void
+  disabled: boolean
 }
 
-function TodoForm({ onAdd }: TodoFormProps) {
+function TodoForm({ onAdd, disabled }: TodoFormProps) {
   // 入力欄の文字列はこのコンポーネントの state で持つ
   const [title, setTitle] = useState('')
 
@@ -28,11 +29,12 @@ function TodoForm({ onAdd }: TodoFormProps) {
         placeholder="やることを入力"
         value={title}
         onChange={(event) => setTitle(event.target.value)}
+        disabled={disabled}
       />
       <button
         className="todo-form__button"
         type="submit"
-        disabled={title.trim() === ''}
+        disabled={disabled || title.trim() === ''}
       >
         追加
       </button>
